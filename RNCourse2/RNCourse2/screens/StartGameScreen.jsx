@@ -1,6 +1,10 @@
 import { Text, View, TextInput, StyleSheet, Alert } from 'react-native'
 import PrimaryButton from '../components/PrimaryButton'
 import { useState } from 'react'
+import Colors from '../constants/colors'
+import Title from '../components/Title'
+import Card from '../components/Card'
+import InstructionText from '../components/InstructionText'
 
 function StartGameScreen({ numberPicked }) {
     const [enteredNumber, setEnteredNumber] = useState('')
@@ -25,8 +29,11 @@ function StartGameScreen({ numberPicked }) {
     }
 
     return (
-        <View style={styles.inputContainer}>
+        <View style={styles.rootContainer}>
+            <Title>Guess My Number</Title>
+        <Card>
             {/* always string type input */}
+            <InstructionText>Enter a Number</InstructionText>
             <TextInput
                 maxLength={2}
                 style={styles.numberInput}
@@ -48,31 +55,19 @@ function StartGameScreen({ numberPicked }) {
                 </View>
 
             </View>
+        </Card>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        justifyContent: 'center', //vertically center
-        alignItems: 'center', // horizontally center
-        padding: 16,
-        marginTop: 100,
-        marginHorizontal: 24,
-        backgroundColor: '#3b021f',
-        borderRadius: 8,
-        elevation: 4, // android only property for shadow
-        shadowColor: 'black', // ios only property for shadow
-        shadowOffset: { width: 0, height: 2 }, // ios only property for shadow
-        shadowRadius: 6, // ios only property for shadow
-        shadowOpacity: 0.26, // ios only property for shadow
-    },
+    
     numberInput: {
         height: 60,
         fontSize: 32,
-        borderBottomColor: '#ddb52f',
+        borderBottomColor: Colors.accent500,
         borderBottomWidth: 1,
-        color: '#ddb52f',
+        color: Colors.accent500,
         marginVertical: 8,
         fontWeight: 'bold',
         width: 50,
@@ -83,7 +78,13 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1
-    }
+    },
+    rootContainer: {
+        flex: 1,
+        marginTop: 100,
+        alignItems: 'center',
+    },
+
 })
 
 export default StartGameScreen

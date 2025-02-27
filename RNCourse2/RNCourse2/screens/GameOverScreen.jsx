@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View} from 'react-native'
+import {Text, View, StyleSheet} from 'react-native'
 
 function GameOverScreen() {
   return (
@@ -8,5 +8,9 @@ function GameOverScreen() {
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  
+})
 
 export default GameOverScreen
