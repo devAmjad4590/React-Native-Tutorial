@@ -1,12 +1,32 @@
-import React from 'react'
-import { View, ScrollView, Text, Image, StyleSheet } from 'react-native'
+import React , {useLayoutEffect, useContext} from 'react'
+import { View, ScrollView, Text, Button, Image, StyleSheet } from 'react-native'
 import { MEALS } from '../data/dummy-data'
 import Footer from '../components/Footer'
 import Subtitle from '../components/Subtitle'
 import List from '../components/List'
+import IconButton from '../components/IconButton'
+import { FavouriteContext } from '../store/context/context'
 
-function MealDetailScreen({ route }) {
+function MealDetailScreen({ route, navigation }) {
+    const favouriteContext = useContext(FavouriteContext)
     const mealId = route.params.mealId
+
+    function toggleFunction(){
+        if(favouriteContext.isFavourite(mealId)){
+            favouriteContext.removeFavourite(mealId)
+        } else {
+            favouriteContext.addFavourite(mealId)
+        }
+    }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => {
+                return <IconButton icon={favouriteContext.isFavourite(mealId) ? 'star' : 'star-outline'} color="white" onPress={toggleFunction} title='Tap me'></IconButton>  
+            }
+        })
+    }, [navigation, toggleFunction])
+
 
     const selectedMeal = MEALS.find(meal => meal.id === mealId)
     return (
